@@ -24,13 +24,17 @@ localizeFile = (data, parent) => {
         localizedData[parent][key] = psuedolocalize(value)
       }
       if (value.includes('{{') && value.includes('}}')) {
-        const stringWithoutVariables = value.split(new RegExp(/{{.*?}}/gm))
+        const re = new RegExp(/{{.*?}}/gm)
+        const stringWithoutVariables = value.split(re)
         if (stringWithoutVariables.length === 2) {
             let localizedStringWithoutVariables = []
             for (j in stringWithoutVariables) {
                 localizedStringWithoutVariables.push(psuedolocalize(stringWithoutVariables[j]))
             }
-            localizedData[key] = localizedStringWithoutVariables.join(value.match(new RegExp(/{{.*?}}/gm)))
+            localizedData[key] = localizedStringWithoutVariables.join(value.match(re))
+        }
+        else {
+          throw `${key}: strings with multiple variables are not currently supported`
         }
       }
     }
