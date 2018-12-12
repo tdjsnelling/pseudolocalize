@@ -1,0 +1,9 @@
+{
+  "name": "psuedolocalize",
+  "version": "1.0.0",
+  "description": "An easy way to psuedolocalize strings, objects and arrays",
+  "main": "index.js",
+  "keywords": ["psuedolocalize", "localiztion", "i18n"],
+  "author": "Tom Snelling",
+  "license": "MIT"
+}
