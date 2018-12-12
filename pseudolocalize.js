@@ -1,4 +1,4 @@
-const psuedolocalize = input => {
+const pseudolocalize = input => {
   const preChars = input.split('')
   let post = ''
   for (i in preChars) {
@@ -65,4 +65,4 @@ const localizeChar = char => {
   }
 }
 
-module.exports = psuedolocalize
+module.exports = pseudolocalize

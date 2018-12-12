@@ -1,5 +1,5 @@
 const fs = require('fs')
-const psuedolocalize = require('./psuedolocalize')
+const pseudolocalize = require('./pseudolocalize')
 
 let localizedData = {}
 
@@ -15,13 +15,13 @@ localizeFile = (data, parent) => {
     const value = data[keys[i]]
     if (typeof value === 'string') {
       if (!parent) {
-        localizedData[key] = psuedolocalize(value)
+        localizedData[key] = pseudolocalize(value)
       }
       else {
         if (!localizedData[parent]) {
           localizedData[parent] = {}
         }
-        localizedData[parent][key] = psuedolocalize(value)
+        localizedData[parent][key] = pseudolocalize(value)
       }
       if (value.includes('{{') && value.includes('}}')) {
         const re = new RegExp(/{{.*?}}/gm)
@@ -29,7 +29,7 @@ localizeFile = (data, parent) => {
         if (stringWithoutVariables.length === 2) {
             let localizedStringWithoutVariables = []
             for (j in stringWithoutVariables) {
-                localizedStringWithoutVariables.push(psuedolocalize(stringWithoutVariables[j]))
+                localizedStringWithoutVariables.push(pseudolocalize(stringWithoutVariables[j]))
             }
             localizedData[key] = localizedStringWithoutVariables.join(value.match(re))
         }
@@ -44,7 +44,7 @@ localizeFile = (data, parent) => {
     else if (Array.isArray(value)) {
       let localizedArray = []
       for (j in value) {
-        localizedArray.push(psuedolocalize(value[j]))
+        localizedArray.push(pseudolocalize(value[j]))
       }
       localizedData[key] = localizedArray
     }
