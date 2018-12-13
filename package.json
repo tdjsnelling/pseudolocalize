@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "An easy way to pseudolocalize strings, objects and arrays",
   "main": "index.js",
-  "keywords": ["pseudolocalize", "localiztion", "i18n"],
+  "keywords": [
+    "pseudolocalize",
+    "localiztion",
+    "i18n"
+  ],
   "author": "Tom Snelling",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "pseudolocalize": "./localize-file.js"
+  }
 }
