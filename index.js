@@ -14,11 +14,16 @@ const pseudolocalize = (value, key = null, parent = null) => {
         throw `${key}: strings with multiple variables are not currently supported`
       }
     }
-    else {
-      return localizeString(value)
-    }
+    return localizeString(value)
   }
-  else if (typeof value === 'object' && !Array.isArray(value)) {
+  else if (Array.isArray(value)) {
+    let localizedArray = []
+    for (j in value) {
+      localizedArray.push(localizeString(value[j]))
+    }
+    return localizedArray
+  }
+  else if (typeof value === 'object') {
     let tempObject = {}
     const subKeys = Object.keys(value)
     for (i in subKeys) {
@@ -30,13 +35,6 @@ const pseudolocalize = (value, key = null, parent = null) => {
       tempObject[key][subKey] = pseudolocalize(subData, subKey, key)
     }
     return tempObject[Object.keys(tempObject)[0]]
-  }
-  else if (Array.isArray(value)) {
-    let localizedArray = []
-    for (j in value) {
-      localizedArray.push(localizeString(value[j]))
-    }
-    return localizedArray
   }
   else {
     return value

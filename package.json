@@ -1,6 +1,6 @@
 {
   "name": "pseudolocalize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An easy way to pseudolocalize strings, objects and arrays",
   "main": "index.js",
   "keywords": [
