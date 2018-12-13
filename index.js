@@ -23,6 +23,10 @@ const pseudolocalize = (value, key = null, parent = null) => {
     }
     return localizedArray
   }
+  else if (value === null) {
+    // needed because `typeof null === 'object'`
+    return null
+  }
   else if (typeof value === 'object') {
     let tempObject = {}
     const subKeys = Object.keys(value)

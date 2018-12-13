@@ -8,6 +8,9 @@ describe('String', () => {
   it('should return null if no string is supplied', () => {
     assert.equal(pseudolocalize(), null)
   })
+  it('should not pseudolocalize variables within a string', () => {
+    assert.equal(pseudolocalize('This is a string with a {{variable}} within it'), 'Tλïƨ ïƨ á ƨƭřïñϱ ωïƭλ á {{variable}} ωïƭλïñ ïƭ')
+  })
 })
 
 describe('Object', () => {
@@ -44,5 +47,11 @@ describe('Number', () => {
 describe('Boolean', () => {
   it('should not alter booleans', () => {
     assert.equal(pseudolocalize(true), true)
+  })
+})
+
+describe('Null', () => {
+  it('should not alter null values', () => {
+    assert.equal(pseudolocalize(null), null)
   })
 })
