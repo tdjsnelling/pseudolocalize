@@ -5,12 +5,17 @@
   "main": "index.js",
   "keywords": [
     "pseudolocalize",
-    "localiztion",
+    "localization",
     "i18n"
   ],
   "author": "Tom Snelling",
   "license": "MIT",
   "bin": {
     "pseudolocalize": "./localize-file.js"
+  },
+  "homepage": "https://github.com/tdjsnelling/pseudolocalize#readme",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/tdjsnelling/pseudolocalize.git"
   }
 }
