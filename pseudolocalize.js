@@ -1,5 +1,57 @@
-const pseudolocalize = input => {
-  const preChars = input.split('')
+let tempObject = {}
+
+const pseudolocalize = (key, value, parent) => {
+  if (typeof value === 'string') {
+    if (!parent) {
+      if (value.includes('{{') && value.includes('}}')) {
+        const re = new RegExp(/{{.*?}}/gm)
+        const stringWithoutVariables = value.split(re)
+        if (stringWithoutVariables.length === 2) {
+            let localizedStringWithoutVariables = []
+            for (j in stringWithoutVariables) {
+                localizedStringWithoutVariables.push(localizeString(stringWithoutVariables[j]))
+            }
+            return localizedStringWithoutVariables.join(value.match(re))
+        }
+        else {
+          throw `${key}: strings with multiple variables are not currently supported`
+        }
+      }
+      else {
+        return localizeString(value)
+      }
+    }
+    else {
+      if (!tempObject[parent]) {
+        tempObject[parent] = {}
+      }
+      tempObject[parent][key] = localizeString(value)
+    }
+  }
+  else if (typeof value === 'object' && !Array.isArray(value)) {
+    tempObject = {}
+    const subKeys = Object.keys(value)
+    for (i in subKeys) {
+      const subKey = subKeys[i]
+      const subData = value[subKey]
+      pseudolocalize(subKey, subData, key)
+    }
+    return tempObject[Object.keys(tempObject)[0]]
+  }
+  else if (Array.isArray(value)) {
+    let localizedArray = []
+    for (j in value) {
+      localizedArray.push(localizeString(value[j]))
+    }
+    return localizedArray
+  }
+  else {
+    return value
+  }
+}
+
+const localizeString = string => {
+  const preChars = string.split('')
   let post = ''
   for (i in preChars) {
     post += localizeChar(preChars[i])
