@@ -5,9 +5,6 @@ describe('String', () => {
   it('should pseudolocalize the string correctly', () => {
     assert.equal(pseudolocalize('This is a string'), 'Tλïƨ ïƨ á ƨƭřïñϱ')
   })
-  it('should return null if no string is supplied', () => {
-    assert.equal(pseudolocalize(), null)
-  })
   it('should not pseudolocalize variables within a string', () => {
     assert.equal(pseudolocalize('This is a string with a {{variable}} within it'), 'Tλïƨ ïƨ á ƨƭřïñϱ ωïƭλ á {{variable}} ωïƭλïñ ïƭ')
   })
@@ -53,5 +50,8 @@ describe('Boolean', () => {
 describe('Null', () => {
   it('should not alter null values', () => {
     assert.equal(pseudolocalize(null), null)
+  })
+  it('should return null if no argument is supplied', () => {
+    assert.equal(pseudolocalize(), null)
   })
 })
